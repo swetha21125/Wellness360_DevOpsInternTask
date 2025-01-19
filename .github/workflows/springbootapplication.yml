@@ -111,6 +111,8 @@ jobs:
       run: |
         # Sanitize branch name to create a valid Docker tag
         SANITIZED_BRANCH_NAME=$(echo "${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]' | tr '/' '-')
+        SANITIZED_BRANCH_NAME=${SANITIZED_BRANCH_NAME//\//-}
+
 
         # Get the ECR registry URI
         ECR_REGISTRY=$(aws ecr describe-repositories --repository-names $ECR_REPOSITORY --query "repositories[0].repositoryUri" --output text)
