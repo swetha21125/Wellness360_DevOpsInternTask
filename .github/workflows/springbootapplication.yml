@@ -3,8 +3,8 @@ name: Build and Deploy to ECR
 on:
   push:
     branches:
-      - main  # Trigger the workflow on pushes to the main branch
-  pull_request:  # Also trigger on pull requests to the main branch
+       
+  pull_request:  
     branches:
       - main
 
@@ -43,7 +43,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1  # Replace with your AWS region
+        aws-region: us-east-1  
 
     # Step 6: Log in to Amazon ECR
     - name: Log in to Amazon ECR
@@ -53,8 +53,8 @@ jobs:
     # Step 7: Build, tag, and push Docker image
     - name: Build, tag, and push Docker image
       env:
-        ECR_REPOSITORY: ecr1 # Replace with your ECR repository name
-        IMAGE_TAG: ${{ github.sha }}       # Use the commit SHA as the image tag
+        ECR_REPOSITORY: ecr1 
+        IMAGE_TAG: ${{ github.sha }}    
       run: |
         # Get the ECR registry URI
         ECR_REGISTRY=$(aws ecr describe-repositories --repository-names $ECR_REPOSITORY --query "repositories[0].repositoryUri" --output text)
