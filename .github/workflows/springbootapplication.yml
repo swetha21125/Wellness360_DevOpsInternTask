@@ -109,17 +109,20 @@ jobs:
         ECR_REPOSITORY: ecr1 
         IMAGE_TAG: ${{ github.sha }}-${{ github.ref_name }}  # Include branch name in the tag for better clarity
       run: |
+        # Sanitize branch name to create a valid Docker tag
+        SANITIZED_BRANCH_NAME=$(echo "${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]' | tr '/' '-')
+
         # Get the ECR registry URI
         ECR_REGISTRY=$(aws ecr describe-repositories --repository-names $ECR_REPOSITORY --query "repositories[0].repositoryUri" --output text)
         
-        # Build the Docker image with a tag based on the commit hash and branch name
+        # Build the Docker image with a tag based on the commit hash and sanitized branch name
         docker build -t $ECR_REGISTRY:$IMAGE_TAG .
 
-        # Tag the image with 'latest' and the branch name for better tracking
-        docker tag $ECR_REGISTRY:$IMAGE_TAG $ECR_REGISTRY:${{ github.ref_name }}-latest
-        docker tag $ECR_REGISTRY:$IMAGE_TAG $ECR_REGISTRY:${{ github.sha }}  # Commit-based tag
+        # Tag the image with 'latest' and the sanitized branch name for better tracking
+        docker tag $ECR_REGISTRY:$IMAGE_TAG $ECR_REGISTRY:${SANITIZED_BRANCH_NAME}-latest
+        docker tag $ECR_REGISTRY:$IMAGE_TAG $ECR_REGISTRY:${GITHUB_SHA}  # Commit-based tag
 
         # Push both tags to the repository
         docker push $ECR_REGISTRY:$IMAGE_TAG
-        docker push $ECR_REGISTRY:${{ github.ref_name }}-latest
-        docker push $ECR_REGISTRY:${{ github.sha }}  # Commit-based tag
+        docker push $ECR_REGISTRY:${SANITIZED_BRANCH_NAME}-latest
+        docker push $ECR_REGISTRY:${GITHUB_SHA}  # Commit-based tag
