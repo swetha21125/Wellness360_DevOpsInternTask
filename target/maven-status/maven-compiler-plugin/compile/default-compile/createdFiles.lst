@@ -1,0 +1,12 @@
+com\swetha\springboot_cicd\controllers\InventoryController.class
+com\swetha\springboot_cicd\repositories\InventoryRepository.class
+com\swetha\springboot_cicd\dtos\InventoryRequestDto.class
+com\swetha\springboot_cicd\modals\InventoryStatus.class
+com\swetha\springboot_cicd\dtos\ApiResponseDto$ApiResponseDtoBuilder.class
+com\swetha\springboot_cicd\modals\Inventory$InventoryBuilder.class
+com\swetha\springboot_cicd\controllers\Controller.class
+com\swetha\springboot_cicd\SpringbootCicdApplication.class
+com\swetha\springboot_cicd\modals\Inventory.class
+com\swetha\springboot_cicd\services\InventoryServiceImpl.class
+com\swetha\springboot_cicd\services\InventoryService.class
+com\swetha\springboot_cicd\dtos\ApiResponseDto.class
