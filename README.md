@@ -1,60 +1,34 @@
- My Spring Boot Application
+How to Run the Project
+Prerequisites
+AWS account with permissions to use ECR.
+Docker installed on your local machine for testing Docker commands.
+GitHub repository setup for using GitHub Actions.
+Setting Up the Project Locally
+Clone the repository:
 
-This is a simple Spring Boot application.
+bash
+Copy
+Edit
+git clone https://github.com/swetha21125/Wellness360_DevOpsInternTask.git
+Build the project: Use Maven to build the project:
 
-**Features:**
-
-**Getting Started:**
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/nreddywellness360/taskmaster.git
-Build the project:
-
-Bash
-
+bash
+Copy
+Edit
 mvn clean install
-Run the application:
+Build the Docker Image: Once Docker is installed, you can build the Docker image locally:
 
-Bash
+bash
+Copy
+Edit
+docker build -t <your-ecr-registry-uri>:<image-tag> .
+Push to AWS ECR: After building the image, tag it and push it to your ECR repository:
 
-mvn spring-boot:run
-API Documentation:
+bash
+Copy
+Edit
+docker tag <image> <your-ecr-registry-uri>:<image-tag>
+docker push <your-ecr-registry-uri>:<image-tag>
+Conclusion
+This project demonstrates how to integrate CI/CD pipelines using GitHub Actions, Docker, and AWS ECR. The workflows I have created automate the process of building, testing, and deploying the application, improving both development speed and reliability.
 
-[ ] Link to API documentation (if available)
-Contributing:
-
-Fork the repository.
-Create a new branch for your feature.
-Make your changes and commit them.
-Push your changes to your fork. 
-5. Create a pull request.   
-License:
-
-This project is licensed under the [License Name] - see the [LICENSE] file for details.
-
-Contact:
-
-Nagesh [nreddy@wellness360.co]
-
-**Explanation:**
-
-* **Header:** A descriptive title for your application.
-* **Features:** A list of the application's key functionalities.
-* **Getting Started:**
-    * **Cloning:** Instructions on how to obtain the project code.
-    * **Building:** Steps to compile the project using Maven.
-    * **Running:** How to execute the application.
-* **API Documentation:** A link to the API documentation if available.
-* **Contributing:** Guidelines for contributors on how to contribute to the project.
-* **License:** Information about the project's license.
-* **Contact:** Your contact information.
-
-**Note:**
-
-* Replace the placeholders (e.g., `<repository_url>`, `[Feature 1]`, `[License Name]`) with the actual values.
-* Update the features, documentation, and other sections as needed for your specific application.
-* Consider adding more sections like "Deployment," "Testing," or "Troubleshooting" if applicable.
-* Customize the readme to match your project's specific needs and style.
-
-This is a basic template, and you can expand it further to include more detailed information and instructions.
